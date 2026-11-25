@@ -3,144 +3,315 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>민준 ♥ 서연 결혼합니다</title>
+  <meta name="theme-color" content="#F6F1E4"> <!-- 모바일 브라우저 주소창 색을 종이 아이보리로 -->
+  <title>MELLOW BEAN · Since 1987</title>
+  <meta name="description" content="1987년부터 같은 자리에서, 천천히 내린 커피. 종로 멜로우길의 카페 MELLOW BEAN.">
+
+  <!-- 글꼴 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main class="invitation">
 
-    <!-- 메인 커버 -->
-    <section class="cover">
-      <p class="cover-script">We're getting married</p>
-      <div class="cover-photo">
-        <span class="photo-placeholder">사진을 넣어주세요</span>
-      </div>
-      <h1 class="cover-names">김민준 <span class="amp">&</span> 이서연</h1>
-      <p class="cover-date">2027년 4월 17일 토요일 오후 1시</p>
-      <p class="cover-place">더채플 앳 청담 3층 그랜드홀</p>
-    </section>
+  <!-- ===== 0. 상단 메뉴바 ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo">MELLOW BEAN</a>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">☰</button>
+      <nav class="nav" id="nav">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#space">Space</a>
+        <a href="#visit">Visit</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- 인사말 -->
-    <section class="section greeting fade-in">
-      <h2 class="section-title">INVITATION</h2>
-      <p class="greeting-text">
-        서로 다른 길을 걸어온 두 사람이<br>
-        이제 같은 길을 함께 걸어가려 합니다.<br><br>
-        봄날의 햇살처럼 따뜻한 마음으로<br>
-        저희의 새로운 시작을 축복해 주시면<br>
-        더없는 기쁨으로 간직하겠습니다.
-      </p>
-      <div class="parents">
-        <p><span class="parent-names">김철수 · 박영희</span>의 아들 <strong>민준</strong></p>
-        <p><span class="parent-names">이정호 · 최미경</span>의 딸 <strong>서연</strong></p>
-      </div>
-    </section>
+  <main>
 
-    <!-- 날짜 / 달력 -->
-    <section class="section calendar-section fade-in">
-      <h2 class="section-title">WEDDING DAY</h2>
-      <p class="calendar-heading">2027. 04. 17</p>
-      <p class="calendar-sub">토요일 오후 1시</p>
-      <div class="calendar" id="calendar"></div>
-      <div class="countdown" id="countdown">
-        <div><span id="cd-days">0</span><small>DAYS</small></div>
-        <div><span id="cd-hours">0</span><small>HOUR</small></div>
-        <div><span id="cd-mins">0</span><small>MIN</small></div>
-        <div><span id="cd-secs">0</span><small>SEC</small></div>
-      </div>
-      <p class="dday-text" id="dday-text"></p>
-    </section>
-
-    <!-- 갤러리 -->
-    <section class="section gallery-section fade-in">
-      <h2 class="section-title">GALLERY</h2>
-      <div class="gallery" id="gallery">
-        <div class="gallery-item" style="--c1:#e8d5c4;--c2:#f5ebe0"></div>
-        <div class="gallery-item" style="--c1:#d6ccc2;--c2:#efe6dd"></div>
-        <div class="gallery-item" style="--c1:#e3d5ca;--c2:#f8f1ea"></div>
-        <div class="gallery-item" style="--c1:#d5bdaf;--c2:#ede0d4"></div>
-        <div class="gallery-item" style="--c1:#e6ccb2;--c2:#f6eadd"></div>
-        <div class="gallery-item" style="--c1:#ddb892;--c2:#f1e3d3"></div>
-      </div>
-      <p class="hint">사진을 누르면 크게 볼 수 있어요</p>
-    </section>
-
-    <!-- 오시는 길 -->
-    <section class="section location fade-in">
-      <h2 class="section-title">LOCATION</h2>
-      <p class="venue-name">더채플 앳 청담</p>
-      <p class="venue-address">서울특별시 강남구 선릉로 757</p>
-      <p class="venue-tel">Tel. 02-000-0000</p>
-      <div class="map-box">
-        <span>지도 영역</span>
-      </div>
-      <div class="map-buttons">
-        <a href="https://map.naver.com/p/search/더채플앳청담" target="_blank" rel="noopener">네이버 지도</a>
-        <a href="https://map.kakao.com/?q=더채플앳청담" target="_blank" rel="noopener">카카오맵</a>
-      </div>
-      <dl class="transport">
-        <dt>지하철</dt>
-        <dd>7호선 청담역 13번 출구 도보 5분</dd>
-        <dt>버스</dt>
-        <dd>청담사거리 정류장 하차 (141, 242, 472)</dd>
-        <dt>주차</dt>
-        <dd>건물 내 지하주차장 2시간 무료</dd>
-      </dl>
-    </section>
-
-    <!-- 마음 전하실 곳 -->
-    <section class="section account fade-in">
-      <h2 class="section-title">마음 전하실 곳</h2>
-      <p class="account-desc">참석이 어려우신 분들을 위해 기재했습니다.<br>너그러운 마음으로 양해 부탁드립니다.</p>
-
-      <div class="accordion">
-        <button class="accordion-header" type="button">신랑측 계좌번호</button>
-        <div class="accordion-body">
-          <div class="account-row">
-            <div><p>신랑 김민준</p><p class="acc-num">국민 123-456-789012</p></div>
-            <button class="copy-btn" data-account="국민 123-456-789012">복사</button>
+    <!-- ===== 1. 히어로 (좌우 분할) ===== -->
+    <section class="hero" id="home">
+      <div class="container hero__inner">
+        <div class="hero__text reveal">
+          <!-- 네모 박스로 감싼 간판형 로고 -->
+          <div class="hero__logo">
+            <p class="hero__logo-top">Since 1987</p>
+            <h1 class="hero__title">MELLOW<br>BEAN</h1>
+            <p class="hero__logo-bottom">Slow Coffee</p>
           </div>
-          <div class="account-row">
-            <div><p>아버지 김철수</p><p class="acc-num">신한 110-123-456789</p></div>
-            <button class="copy-btn" data-account="신한 110-123-456789">복사</button>
-          </div>
+          <p class="hero__desc">그때 그 자리, 그때 그 맛.<br>천천히 내린 커피 한 잔.</p>
+          <a href="#menu" class="btn">메뉴 보기</a>
         </div>
-      </div>
-
-      <div class="accordion">
-        <button class="accordion-header" type="button">신부측 계좌번호</button>
-        <div class="accordion-body">
-          <div class="account-row">
-            <div><p>신부 이서연</p><p class="acc-num">우리 1002-123-456789</p></div>
-            <button class="copy-btn" data-account="우리 1002-123-456789">복사</button>
-          </div>
-          <div class="account-row">
-            <div><p>아버지 이정호</p><p class="acc-num">하나 123-456789-01234</p></div>
-            <button class="copy-btn" data-account="하나 123-456789-01234">복사</button>
-          </div>
+        <div class="hero__image reveal">
+          <img src="images/latte-cookie-set.jpg" alt="창가 테이블 위 라떼와 초코칩 쿠키, 작은 꽃병" width="1200" height="1010" fetchpriority="high">
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <button class="share-btn" id="share-btn" type="button">링크 복사하기</button>
-      <p>Thank you for celebrating with us</p>
-    </footer>
+    <!-- 흘러가는 글자 띠 -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>FRESH ROASTED ★ SINCE 1987 ★ SLOW COFFEE ★ MELLOW BEAN ★&nbsp;</span>
+        <span>FRESH ROASTED ★ SINCE 1987 ★ SLOW COFFEE ★ MELLOW BEAN ★&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- ===== 2. 카페 소개 ===== -->
+    <section class="section section--deep" id="about">
+      <div class="container about">
+        <div class="about__image framed reveal">
+          <img src="images/hand-drip-coffee.jpg" alt="동주전자로 핸드드립 커피를 내리는 모습" width="1200" height="799" loading="lazy">
+        </div>
+        <div class="about__text reveal">
+          <p class="label">Our Story</p>
+          <h2 class="section-title">변하지 않는 것들</h2>
+          <p>1987년 봄, 종로의 작은 골목에 MELLOW BEAN이 문을 열었습니다. 낡은 동주전자 하나와 손으로 볶은 원두, 그리고 천천히 기다리는 마음이 전부였지요.</p>
+          <p>세월이 흘러 거리의 풍경은 많이 바뀌었지만, 우리는 여전히 같은 자리에서 같은 방식으로 커피를 내립니다. 서두르지 않고, 한 잔 한 잔 정성껏.</p>
+          <ul class="stats">
+            <li><strong>1987</strong><span>문을 연 해</span></li>
+            <li><strong>39년</strong><span>같은 자리</span></li>
+            <li><strong>100%</strong><span>직접 로스팅</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. 대표 메뉴 ===== -->
+    <section class="section" id="signature">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="label">Signature</p>
+          <h2 class="section-title">오래도록 사랑받은 두 가지</h2>
+        </div>
+        <div class="signature">
+          <article class="signature__item reveal">
+            <div class="signature__image framed">
+              <span class="signature__no">No.01</span>
+              <img src="images/cafe-latte.jpg" alt="나뭇잎 모양 라떼 아트가 그려진 유리잔 카페 라떼" width="1200" height="1037" loading="lazy">
+            </div>
+            <h3 class="signature__name">카페 라떼 <small>Café Latte</small></h3>
+            <p>1987년부터 지켜온 우유와 에스프레소의 비율. 첫 손님에게 내어드린 그 맛 그대로, 부드러운 거품 위에 라떼 아트를 그려 드립니다.</p>
+            <p class="price">5,000원</p>
+          </article>
+          <article class="signature__item reveal">
+            <div class="signature__image framed">
+              <span class="signature__no">No.02</span>
+              <img src="images/tiramisu.jpg" alt="초콜릿 조각을 올린 클래식 티라미수" width="1200" height="904" loading="lazy">
+            </div>
+            <h3 class="signature__name">클래식 티라미수 <small>Classic Tiramisu</small></h3>
+            <p>에스프레소를 듬뿍 적신 옛날식 티라미수. 매일 아침 가게에서 직접 만들어 하루 스무 개만 준비합니다.</p>
+            <p class="price">6,500원</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. 전체 메뉴 (사진 카드형) ===== -->
+    <section class="section section--deep" id="menu">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="label">Menu</p>
+          <h2 class="section-title">오늘의 메뉴판</h2>
+        </div>
+        <div class="menu-grid">
+          <article class="card reveal">
+            <div class="card__image"><img src="images/hand-drip-coffee.jpg" alt="핸드드립 커피" width="1200" height="799" loading="lazy"></div>
+            <div class="card__body">
+              <h3 class="card__name">핸드드립 커피 <small>Hand Drip</small></h3>
+              <p class="card__desc">주전자 하나로 천천히, 그날의 원두를 내립니다</p>
+              <p class="price">6,500원</p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <div class="card__image"><img src="images/cafe-latte.jpg" alt="카페 라떼" width="1200" height="1037" loading="lazy"></div>
+            <div class="card__body">
+              <h3 class="card__name">카페 라떼 <small>Café Latte</small></h3>
+              <p class="card__desc">1987년부터 지켜온 우유와 에스프레소의 비율</p>
+              <p class="price">5,000원</p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <div class="card__image"><img src="images/latte-cookie-set.jpg" alt="라떼와 초코칩 쿠키 세트" width="1200" height="1010" loading="lazy"></div>
+            <div class="card__body">
+              <h3 class="card__name">라떼 &amp; 쿠키 세트 <small>Latte &amp; Cookie</small></h3>
+              <p class="card__desc">갓 구운 초코칩 쿠키를 곁들인 오후의 한 잔</p>
+              <p class="price">7,500원</p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <div class="card__image"><img src="images/strawberry-latte.jpg" alt="생딸기를 올린 딸기 라떼" width="875" height="1200" loading="lazy"></div>
+            <div class="card__body">
+              <h3 class="card__name">딸기 라떼 <small>Strawberry Latte</small></h3>
+              <p class="card__desc">생딸기를 직접 갈아 넣은 계절 한정 메뉴</p>
+              <p class="price">6,000원</p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <div class="card__image"><img src="images/citrus-ade.jpg" alt="줄무늬 빨대를 꽂은 시트러스 에이드" width="904" height="1200" loading="lazy"></div>
+            <div class="card__body">
+              <h3 class="card__name">시트러스 에이드 <small>Citrus Ade</small></h3>
+              <p class="card__desc">상큼한 과일청에 탄산을 더한 시원한 한 잔</p>
+              <p class="price">5,500원</p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <div class="card__image"><img src="images/tiramisu.jpg" alt="클래식 티라미수" width="1200" height="904" loading="lazy"></div>
+            <div class="card__body">
+              <h3 class="card__name">클래식 티라미수 <small>Classic Tiramisu</small></h3>
+              <p class="card__desc">에스프레소를 듬뿍 적신 옛날식 티라미수</p>
+              <p class="price">6,500원</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. 매장 공간 ===== -->
+    <section class="section" id="space">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="label">The Space</p>
+          <h2 class="section-title">머물기 좋은 자리</h2>
+        </div>
+        <div class="space__image framed reveal">
+          <img src="images/cafe-interior.jpg" alt="로스팅실과 높은 창, 식물이 있는 넓은 매장 내부" width="1200" height="816" loading="lazy">
+        </div>
+        <p class="space__desc reveal">오래된 공장 건물을 고쳐 만든 높은 천장 아래, 한쪽에서는 매일 아침 원두를 볶고 다른 한쪽에서는 손님들이 느긋하게 하루를 보냅니다. 커다란 창으로 들어오는 햇살과 원두 볶는 향기, 그것이 MELLOW BEAN의 오래된 풍경입니다.</p>
+      </div>
+    </section>
+
+    <!-- ===== 6. 오시는 길 ===== -->
+    <section class="section section--deep" id="visit">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="label">Visit Us</p>
+          <h2 class="section-title">찾아오시는 길</h2>
+        </div>
+
+        <div class="visit">
+          <!-- 매장 정보 -->
+          <dl class="visit__info reveal">
+            <div><dt>주소</dt><dd>서울특별시 종로구 멜로우길 87, 1층</dd></div>
+            <div><dt>영업시간</dt><dd>매일 08:00 – 21:00</dd></div>
+            <div><dt>휴무일</dt><dd>매주 월요일</dd></div>
+            <div><dt>전화</dt><dd><a href="tel:021234567">02-123-4567</a></dd></div>
+            <div><dt>인스타그램</dt><dd>@mellowbean_since1987</dd></div>
+          </dl>
+
+          <!-- 레트로 약도 -->
+          <div class="visit__map reveal">
+            <div class="map-box">
+              <svg viewBox="0 0 400 300" role="img" aria-label="안국역 1번 출구에서 멜로우길을 따라 300미터 걸으면 오른편에 MELLOW BEAN이 있는 약도">
+                <!-- 큰 도로 (가로) -->
+                <path d="M0 210 H400" class="map-road-wide"/>
+                <text x="16" y="240" class="map-small">율곡로</text>
+                <!-- 큰 도로 (세로) -->
+                <path d="M90 0 V300" class="map-road-wide"/>
+                <text x="104" y="22" class="map-small">북촌로</text>
+                <!-- 멜로우길 (골목) -->
+                <path d="M90 120 H330" class="map-road"/>
+                <text x="180" y="110" class="map-small">멜로우길</text>
+                <path d="M330 120 V210" class="map-road"/>
+                <!-- 블록 (건물) -->
+                <rect x="112" y="140" width="60" height="50" class="map-block"/>
+                <rect x="186" y="140" width="40" height="50" class="map-block"/>
+                <rect x="112" y="40" width="90" height="56" class="map-block"/>
+                <rect x="290" y="40" width="80" height="56" class="map-block"/>
+                <rect x="350" y="140" width="40" height="50" class="map-block"/>
+                <!-- 안국역 -->
+                <circle cx="90" cy="210" r="14" class="map-station"/>
+                <text x="90" y="215" class="map-station-num">3</text>
+                <text x="112" y="270" class="map-label">안국역 1번 출구</text>
+                <!-- 걷는 길 (점선) -->
+                <path d="M104 202 Q110 120 160 120 H240" class="map-walk"/>
+                <!-- 매장 위치 -->
+                <polygon points="258,92 263,106 278,106 266,115 270,129 258,121 246,129 250,115 238,106 253,106" class="map-star"/>
+                <rect x="222" y="134" width="110" height="26" class="map-tag"/>
+                <text x="277" y="152" class="map-tag-text">MELLOW BEAN</text>
+                <!-- 방위 표시 -->
+                <g transform="translate(366 250)">
+                  <circle r="16" class="map-compass"/>
+                  <path d="M0 -12 L5 4 L0 0 L-5 4 Z" class="map-compass-arrow"/>
+                  <text y="-20" class="map-small map-center">N</text>
+                </g>
+              </svg>
+            </div>
+            <p class="map-note">약도는 실제 축척과 다를 수 있습니다.</p>
+            <div class="map-buttons">
+              <a href="https://map.naver.com/p/search/%EC%95%88%EA%B5%AD%EC%97%AD" target="_blank" rel="noopener" class="btn btn--line">네이버 지도</a>
+              <a href="https://map.kakao.com/?q=%EC%95%88%EA%B5%AD%EC%97%AD" target="_blank" rel="noopener" class="btn btn--line">카카오맵</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 교통 안내 -->
+        <div class="transport">
+          <div class="transport__card reveal">
+            <p class="label">Subway</p>
+            <h3>지하철</h3>
+            <p>3호선 안국역 1번 출구에서 직진 300m, 도보 5분</p>
+          </div>
+          <div class="transport__card reveal">
+            <p class="label">Bus</p>
+            <h3>버스</h3>
+            <p>'안국역' 정류장 하차 후 도보 3분</p>
+          </div>
+          <div class="transport__card reveal">
+            <p class="label">Parking</p>
+            <h3>주차</h3>
+            <p>매장 전용 주차장이 없습니다. 인근 공영주차장을 이용해 주세요</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6-1. 카페 지도 (페이지 맨 아래) ===== -->
+    <section class="section cafe-map" id="map">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="label">Cafe Map</p>
+          <h2 class="section-title">카페 지도</h2>
+        </div>
+        <figure class="cafe-map__figure reveal">
+          <div class="cafe-map__frame">
+            <img src="images/cafe-map.png" alt="반월당역 근처 지도. 빨간 동그라미로 표시한 곳이 카페 위치" width="565" height="452" loading="lazy">
+          </div>
+          <figcaption class="cafe-map__caption">
+            <span class="cafe-map__dot" aria-hidden="true"></span>
+            빨간 동그라미로 표시한 곳이 MELLOW BEAN입니다.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 흘러가는 글자 띠 -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>FRESH ROASTED ★ SINCE 1987 ★ SLOW COFFEE ★ MELLOW BEAN ★&nbsp;</span>
+        <span>FRESH ROASTED ★ SINCE 1987 ★ SLOW COFFEE ★ MELLOW BEAN ★&nbsp;</span>
+      </div>
+    </div>
+
   </main>
 
-  <!-- 갤러리 모달 -->
-  <div class="modal" id="modal">
-    <button class="modal-close" id="modal-close" aria-label="닫기">&times;</button>
-    <button class="modal-nav prev" id="modal-prev" aria-label="이전">&#8249;</button>
-    <div class="modal-content" id="modal-content"></div>
-    <button class="modal-nav next" id="modal-next" aria-label="다음">&#8250;</button>
-  </div>
+  <!-- ===== 7. 푸터 ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__logo">MELLOW BEAN</p>
+      <p class="footer__copy">천천히, 그때 그 맛 그대로.</p>
+      <p class="footer__legal">© 1987–2026 MELLOW BEAN. All rights reserved.</p>
+    </div>
+  </footer>
 
-  <!-- 토스트 메시지 -->
-  <div class="toast" id="toast"></div>
+  <!-- 맨 위로 가기 버튼 -->
+  <button class="to-top" id="toTop" type="button" aria-label="맨 위로 이동">
+    <span class="to-top__arrow" aria-hidden="true">↑</span>
+    <span class="to-top__text">TOP</span>
+  </button>
 
   <script src="js/main.js"></script>
 </body>

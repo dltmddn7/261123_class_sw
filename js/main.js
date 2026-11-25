@@ -1,168 +1,100 @@
-// ===== 결혼식 날짜 설정 =====
-const WEDDING_DATE = new Date(2027, 3, 17, 13, 0, 0); // 월은 0부터 시작 (3 = 4월)
+/* =========================================================
+   MELLOW BEAN · 동작 스크립트
+   ========================================================= */
 
-// ===== 달력 그리기 =====
-function renderCalendar() {
-  const calendar = document.getElementById('calendar');
-  const year = WEDDING_DATE.getFullYear();
-  const month = WEDDING_DATE.getMonth();
-  const weddingDay = WEDDING_DATE.getDate();
+// ----- 1. 스크롤하면 상단 메뉴바 아래에 이중선 표시 -----
+const header = document.getElementById('header');
+const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-  const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
-  dayNames.forEach((name, i) => {
-    const el = document.createElement('div');
-    el.className = 'day-name' + (i === 0 ? ' sun' : i === 6 ? ' sat' : '');
-    el.textContent = name;
-    calendar.appendChild(el);
+// ----- 2. 모바일 메뉴 (☰ 버튼) 열고 닫기 -----
+const navToggle = document.getElementById('navToggle');
+const nav = document.getElementById('nav');
+
+const setMenu = (open) => {
+  nav.classList.toggle('is-open', open);
+  navToggle.setAttribute('aria-expanded', open);
+  navToggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  navToggle.textContent = open ? '✕' : '☰';
+};
+
+navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+
+// 메뉴 링크를 누르면 메뉴 닫기
+nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+
+// 메뉴 바깥을 누르거나 Esc 키를 누르면 닫기
+document.addEventListener('click', (e) => {
+  if (nav.classList.contains('is-open') && !header.contains(e.target)) setMenu(false);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+    setMenu(false);
+    navToggle.focus();
+  }
+});
+
+// 화면이 PC/태블릿 폭(768px 이상)으로 넓어지면 모바일 메뉴 상태 초기화 (폰을 가로로 돌릴 때 등)
+window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+  if (e.matches) setMenu(false);
+});
+
+// ----- 3. 맨 위로 가기 (TOP) 버튼 -----
+const toTop = document.getElementById('toTop');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// 첫 화면을 지나 600px 이상 내려가면 버튼 보이기
+const updateToTop = () => toTop.classList.toggle('is-visible', window.scrollY > 600);
+window.addEventListener('scroll', updateToTop, { passive: true });
+updateToTop();
+
+toTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+});
+
+// ----- 4. 로고 강조 효과 -----
+// 스크롤을 내려 로고가 화면 밖으로 나갔다가, 다시 올라와 로고가 보이면 도장 찍듯 강조한다
+const heroLogo = document.querySelector('.hero__logo');
+
+if (heroLogo) {
+  let hasLeft = false; // 로고가 한 번이라도 화면 밖으로 완전히 나갔는지
+
+  const checkLogo = () => {
+    const r = heroLogo.getBoundingClientRect();
+    // 로고가 화면에 보이는 비율 (0 = 안 보임, 1 = 전부 보임)
+    const visible = (Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0)) / r.height;
+
+    if (visible <= 0) {
+      hasLeft = true;
+    } else if (hasLeft && visible >= 0.6) {
+      hasLeft = false;
+      heroLogo.classList.remove('is-emphasized');
+      void heroLogo.offsetWidth; // 애니메이션을 처음부터 다시 재생하기 위한 트릭
+      heroLogo.classList.add('is-emphasized');
+    }
+  };
+
+  window.addEventListener('scroll', checkLogo, { passive: true });
+  heroLogo.addEventListener('animationend', (e) => {
+    if (e.target === heroLogo) heroLogo.classList.remove('is-emphasized');
   });
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const lastDate = new Date(year, month + 1, 0).getDate();
-
-  for (let i = 0; i < firstDay; i++) {
-    calendar.appendChild(document.createElement('div'));
-  }
-
-  for (let d = 1; d <= lastDate; d++) {
-    const el = document.createElement('div');
-    const weekday = (firstDay + d - 1) % 7;
-    el.className = 'day';
-    if (weekday === 0) el.classList.add('sun');
-    if (weekday === 6) el.classList.add('sat');
-    if (d === weddingDay) el.classList.add('wedding');
-    el.textContent = d;
-    calendar.appendChild(el);
-  }
 }
 
-// ===== 카운트다운 =====
-function updateCountdown() {
-  const diff = WEDDING_DATE - new Date();
-  const ddayText = document.getElementById('dday-text');
+// ----- 5. 스크롤하면 내용이 살짝 떠오르며 나타나기 -----
+const revealItems = document.querySelectorAll('.reveal');
 
-  if (diff <= 0) {
-    document.getElementById('countdown').style.display = 'none';
-    ddayText.innerHTML = '민준 ♥ 서연의 결혼식이 <b>진행되었습니다</b>. 감사합니다!';
-    return;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const mins = Math.floor((diff / (1000 * 60)) % 60);
-  const secs = Math.floor((diff / 1000) % 60);
-
-  document.getElementById('cd-days').textContent = days;
-  document.getElementById('cd-hours').textContent = hours;
-  document.getElementById('cd-mins').textContent = mins;
-  document.getElementById('cd-secs').textContent = secs;
-
-  ddayText.innerHTML = `민준 ♥ 서연의 결혼식이 <b>${days}일</b> 남았습니다.`;
-}
-
-// ===== 스크롤 등장 애니메이션 =====
-function initFadeIn() {
+if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // 한 번 나타나면 다시 감추지 않음
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+  revealItems.forEach((item) => observer.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add('is-visible'));
 }
-
-// ===== 갤러리 모달 =====
-function initGallery() {
-  const items = Array.from(document.querySelectorAll('.gallery-item'));
-  const modal = document.getElementById('modal');
-  const content = document.getElementById('modal-content');
-  let current = 0;
-
-  function show(index) {
-    current = (index + items.length) % items.length;
-    // 실제 사진을 쓸 경우 items[current]의 이미지 경로를 사용하면 됩니다.
-    content.style.background = getComputedStyle(items[current]).backgroundImage;
-  }
-
-  items.forEach((item, i) => {
-    item.addEventListener('click', () => {
-      show(i);
-      modal.classList.add('open');
-    });
-  });
-
-  document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('open'));
-  document.getElementById('modal-prev').addEventListener('click', () => show(current - 1));
-  document.getElementById('modal-next').addEventListener('click', () => show(current + 1));
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.remove('open');
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (!modal.classList.contains('open')) return;
-    if (e.key === 'Escape') modal.classList.remove('open');
-    if (e.key === 'ArrowLeft') show(current - 1);
-    if (e.key === 'ArrowRight') show(current + 1);
-  });
-}
-
-// ===== 계좌 아코디언 =====
-function initAccordion() {
-  document.querySelectorAll('.accordion').forEach((acc) => {
-    const header = acc.querySelector('.accordion-header');
-    const body = acc.querySelector('.accordion-body');
-
-    header.addEventListener('click', () => {
-      const isOpen = acc.classList.toggle('open');
-      body.style.maxHeight = isOpen ? body.scrollHeight + 'px' : '0';
-    });
-  });
-}
-
-// ===== 복사 기능 =====
-function showToast(message) {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.classList.add('show');
-  clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => toast.classList.remove('show'), 2000);
-}
-
-async function copyText(text, message) {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch {
-    // 로컬 파일(file://) 등 clipboard API가 막힌 환경 대비
-    const temp = document.createElement('textarea');
-    temp.value = text;
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand('copy');
-    temp.remove();
-  }
-  showToast(message);
-}
-
-function initCopy() {
-  document.querySelectorAll('.copy-btn').forEach((btn) => {
-    btn.addEventListener('click', () => copyText(btn.dataset.account, '계좌번호가 복사되었습니다'));
-  });
-
-  document.getElementById('share-btn').addEventListener('click', () => {
-    copyText(window.location.href, '청첩장 링크가 복사되었습니다');
-  });
-}
-
-// ===== 실행 =====
-document.addEventListener('DOMContentLoaded', () => {
-  renderCalendar();
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-  initFadeIn();
-  initGallery();
-  initAccordion();
-  initCopy();
-});
